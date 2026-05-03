@@ -28,7 +28,6 @@ def get_random_pos(surface):
 
     return (random.randint(0, limit_x), random.randint(0, limit_y))
 
-
 pygame.init() #1
 clock = pygame.time.Clock() #2
 screen = pygame.display.set_mode((800, 600), pygame.RESIZABLE) #3
@@ -63,7 +62,6 @@ current_hits = 0
 current_delay = 2000
 MOVE_TARGET_EVENT = pygame.USEREVENT + 1
 pygame.time.set_timer(MOVE_TARGET_EVENT, current_delay)
-
 
 running = True
 while running: #5
@@ -112,16 +110,13 @@ while running: #5
     is_flashing = message and (current_time - message_timer < MESSAGE_DURATION)
 
     if is_flashing:
-        # Рисуем вспышку (круг + черный текст)
         pygame.draw.circle(screen, flash_color, last_click_pos, 45)
         msg_surface = font.render(message, True, BLACK)
         text_x = last_click_pos[0] - msg_surface.get_width() // 2
         text_y = last_click_pos[1] - msg_surface.get_height() // 2
         screen.blit(msg_surface, (text_x, text_y))
     else:
-        # Вспышка погасла — рисуем яблоко
         screen.blit(APPLE_IMAGE, target_rect)
-        # Очищаем сообщение, чтобы оно не мешало логике
         if message != "":
             message = ""
 
